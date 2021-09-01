@@ -87,14 +87,16 @@ if  __name__ == '__main__':
         ent = [float(input("Digite o valor do 1° peso: ")),float(input("Digite o valor do 2° peso: "))]
     else:
         raise Exception
+    tipoFuncao = ''
     if entrada == 1 and quantEntrada == 1:
         graficoFuncaoTangenteHiperbolica()#usar para gerar o gráfico da função
+        tipoFuncao = 'Função Tangente Hiperbólica'
     elif entrada == 2:
         if quantEntrada == 1:
             graficoFuncaoLogistica(dominioEntrada = dominio, w1 = ent[0] , theta = _theta,beta = _beta, pontosDeDiscretizacao = _pontosDeDiscretizacao)
         else:
             graficoFuncaoLogistica2(dominioEntrada = dominio, w = ent , theta = _theta,beta = _beta, pontosDeDiscretizacao = _pontosDeDiscretizacao)
-    tipoFuncao = 'Função Logística'
+        tipoFuncao = 'Função Logística'
     ax.set_title('Grafico entrada (x1,x2) em relação a saída g(u)/y, sendo x1 = x2')
     ax.plot(vetorEntradas,vetorGU,label = tipoFuncao)
     ax.set_xlabel('Entrada x')
