@@ -88,15 +88,15 @@ if  __name__ == '__main__':
     if entrada == 1 and quantEntrada == 1:
         tipoFuncao = 'Função Tangente Hiperbolica'
         graficoFuncaoTangenteHiperbolica()#usar para gerar o gráfico da função
-        ax.set_title('Grafico entrada x1 em relação a saída g(u)/y')
+        ax.set_title('Gráfico entrada x1 em relação a saída g(u)/y')
     elif entrada == 2:
         tipoFuncao = 'Função Logística'
         if quantEntrada == 1:
             graficoFuncaoLogistica(dominioEntrada = dominio, w1 = ent[0] , theta = _theta,beta = _beta, pontosDeDiscretizacao = _pontosDeDiscretizacao)
-            ax.set_title('Grafico entrada x1 em relação a saída g(u)/y')
+            ax.set_title('Gráfico entrada x1 em relação a saída g(u)/y')
         else:
             graficoFuncaoLogistica2(dominioEntrada = dominio, w = ent , theta = _theta,beta = _beta, pontosDeDiscretizacao = _pontosDeDiscretizacao)
-            ax.set_title('Grafico entrada (x1,x2) em relação a saída g(u)/y, sendo x1 = x2')
+            ax.set_title('Gráfico entrada (x1,x2) em relação a saída g(u)/y, sendo x1 = x2')
     
     ax.plot(vetorEntradas,vetorGU,label = tipoFuncao)
     ax.set_xlabel('Entrada x')
