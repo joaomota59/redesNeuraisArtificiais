@@ -44,17 +44,18 @@ def camadaSimples(entrada_e_peso=[],entrada_e_peso_prod=[],limiarDeAtivacao =[],
             pontencialDeAtv.append(u)
 
     k = 0
-    for indiceSaida,saida in enumerate(pontencialDeAtv):
+    print("\nPasso 3 g(u):")
+    for indicePotencial,potencial in enumerate(pontencialDeAtv):
         if funcaoDeAtivacao == 1:
-            k = degrau(saida)
+            k = degrau(potencial)
         elif funcaoDeAtivacao == 2:
-            k = linear(saida)
+            k = linear(potencial)
         elif funcaoDeAtivacao == 3:
-            k = logistica(saida,beta)
+            k = logistica(potencial,beta)
         elif funcaoDeAtivacao == 4:
-            k = tangenteHiperbolica(saida,beta)
+            k = tangenteHiperbolica(potencial,beta)
         saidas.append(k)
-        print("g(u"+str(indiceSaida)+") =",k)
+        print("g(u"+str(indicePotencial+1)+") =",k)
     return saidas
 
 
