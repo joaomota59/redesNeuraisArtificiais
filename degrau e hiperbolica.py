@@ -1,7 +1,6 @@
-import sys
+from math import e
 
 def tangHiperbolica(vet = [(0.3,0.4),(0.7,0.5)],theta = 0.2,beta = 1):
-    e = sys.float_info.epsilon
     somatorio = 0
     print("Σ = ",end="")
     for i in range(len(vet)):
