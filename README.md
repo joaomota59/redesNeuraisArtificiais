@@ -1,5 +1,5 @@
 # Redes Neurais Arificiais
-# Descrição
+## Descrição
 * Repositório com programas usados em Redes Neurais Artificiais
 ## Programas
 ### [degrau e hiperbolica.py](https://github.com/joaomota59/redesNeuraisArtificiais/blob/main/degrau%20e%20hiperbolica.py)
