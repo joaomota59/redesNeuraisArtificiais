@@ -1,10 +1,9 @@
-import sys
+from math import e
 import matplotlib.pyplot as plt
 #from itertools import permutations
 
 
 def tangHiperbolica(vet = [(0.3,0.4),(0.7,0.5)],theta = 0.2,beta = 1):
-    e = sys.float_info.epsilon
     somatorio = 0
     print("Σ = ",end="")
     for i in range(len(vet)):
@@ -21,7 +20,6 @@ def tangHiperbolica(vet = [(0.3,0.4),(0.7,0.5)],theta = 0.2,beta = 1):
     return saida
 
 def logistica(vet = [(0.3,0.4),(0.7,0.5)],theta = 0.2,beta = 1):
-    e = sys.float_info.epsilon
     somatorio = 0
     print("Σ = ",end="")
     for i in range(len(vet)):
@@ -80,7 +78,7 @@ if  __name__ == '__main__':
     _beta = float(input("Digite o valor de beta: "))
     _theta = float(input("Digite o valor de theta: "))
     _pontosDeDiscretizacao = int(input("Quantidade de pontos de discretização: "))
-    
+    tipoFuncao=''
     if(quantEntrada == 1):
         ent = [float(input("Digite o valor do peso: "))]
     elif (quantEntrada == 2):
@@ -88,14 +86,18 @@ if  __name__ == '__main__':
     else:
         raise Exception
     if entrada == 1 and quantEntrada == 1:
+        tipoFuncao = 'Função Tangente Hiperbolica'
         graficoFuncaoTangenteHiperbolica()#usar para gerar o gráfico da função
+        ax.set_title('Grafico entrada x1 em relação a saída g(u)/y')
     elif entrada == 2:
+        tipoFuncao = 'Função Logística'
         if quantEntrada == 1:
             graficoFuncaoLogistica(dominioEntrada = dominio, w1 = ent[0] , theta = _theta,beta = _beta, pontosDeDiscretizacao = _pontosDeDiscretizacao)
+            ax.set_title('Grafico entrada x1 em relação a saída g(u)/y')
         else:
             graficoFuncaoLogistica2(dominioEntrada = dominio, w = ent , theta = _theta,beta = _beta, pontosDeDiscretizacao = _pontosDeDiscretizacao)
-    tipoFuncao = 'Função Logística'
-    ax.set_title('Grafico entrada (x1,x2) em relação a saída g(u)/y, sendo x1 = x2')
+            ax.set_title('Grafico entrada (x1,x2) em relação a saída g(u)/y, sendo x1 = x2')
+    
     ax.plot(vetorEntradas,vetorGU,label = tipoFuncao)
     ax.set_xlabel('Entrada x')
     ax.set_ylabel('Saída y/g(u)')
