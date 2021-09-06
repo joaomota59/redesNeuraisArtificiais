@@ -17,6 +17,9 @@ def camadaSimples(entrada_e_peso=[],entrada_e_peso_prod=[],limiarDeAtivacao =[],
     pontencialDeAtv = []#potencial de ativação de cada neuronio
     saidas = []#saídas de cada neuronio g(u)/y
     #print("\nPasso 1 [u = Σ - θ]:")
+
+
+    '''
     for indexEntrada,i in enumerate(entrada_e_peso_prod): 
         #print("u"+str(indexEntrada+1)+" = ",end="")
         for indexCamada,j in enumerate(i):
@@ -24,7 +27,9 @@ def camadaSimples(entrada_e_peso=[],entrada_e_peso_prod=[],limiarDeAtivacao =[],
                 #print("x"+str(indexCamada+1)+"*w("+str(indexCamada+1)+","+str(indexEntrada+1)+") + ",end="")
                 continue
             #print("x"+str(indexCamada+1)+"*w("+str(indexCamada+1)+","+str(indexEntrada+1)+") - θ"+str(indexEntrada+1))#se for o ultimo elemento dá \n
+    '''
 
+    
     #print("\nPasso 2 [u = Σ - θ]:")
     for indexEntrada,i in enumerate(entrada_e_peso_prod): 
         #print("u"+str(indexEntrada+1)+" = ",end="")
@@ -140,9 +145,6 @@ if  __name__ == '__main__':
     numeroCamadas = 0
     quantidadePorCamada = []#quantidade de neurônio por camada <-> Usado no algoritmo de Múltiplas Camadas  
     entrada_e_peso_prod = []#produto da entrada com o peso
-    eixo_x = []#valores do eixo x
-    eixo_y = []#valores do eixo y
-    eixo_z = []#valores do eixo z
     valoresDeEntrada = valoresPA(dominio[0],dominio[1],_pontosDeDiscretizacao)
 
     vezes = []#guardará o resultado de cada vez que foi rodado o script
@@ -162,7 +164,11 @@ if  __name__ == '__main__':
             limiarDeAtivacao = [random()] #limiar de ativação randomico para cada configuracao
             informacoes.append([w1,w2,limiarDeAtivacao[0]])
             #print(w1,w2,limiarDeAtivacao)
-            
+
+            eixo_x = []#valores do eixo x
+            eixo_y = []#valores do eixo y
+            eixo_z = []#valores do eixo z
+                    
             for x1,x2 in permutations(valoresDeEntrada,2):
                 entrada_e_peso.append([[x1,w1]])
                 entrada_e_peso.append([[x2,w2]])
@@ -192,7 +198,9 @@ if  __name__ == '__main__':
             limiarDeAtivacao = [] #limiar de ativação randomico para cada configuracao
             funcaoDeAtivacao = [] #Funcao de ativação para cada neurônio
             
-            
+            eixo_x = []#valores do eixo x
+            eixo_y = []#valores do eixo y
+            eixo_z = []#valores do eixo z
                 
             for i in range(int(sum(quantidadePorCamada))):#percorre em todos neurônios para atribuir o limiar para cada um
                 limiarDeAtivacao.append(random())#Limiar de ativacao randomico para cada neuronio
@@ -202,7 +210,8 @@ if  __name__ == '__main__':
 
             for i in range(int(2*quantidadePorCamada[0]+numeroDePesos)):#numero de pesos da primeira camada + numero de pesos das camadas internas
                 pesosCamadas.append(random())#peso randomico gerado para cada neuronio
-                
+
+            informacoes.append((pesosCamadas,limiarDeAtivacao))
 
             for x1,x2 in permutations(valoresDeEntrada,2):
                 contadorAux = 0
@@ -223,7 +232,6 @@ if  __name__ == '__main__':
                 eixo_x.append(x1)
                 eixo_y.append(x2)
                 eixo_z.append(resultado)
-            informacoes.append([pesosCamadas[contadorAux]])#informacoes do pesos inciais
             vezes.append([eixo_x,eixo_y,eixo_z])#guarda o resultado para cada configuração
 
     cont = 0
@@ -232,10 +240,10 @@ if  __name__ == '__main__':
             if simplesOuMultipla == 1:
                 axs1[i,j].set_title('Gráfico com w1 = '+str(round(informacoes[cont][0],2))+', w2 = '+
                                     str(round(informacoes[cont][1],2))+
-                  ', limiar(θ) = '+str(round(informacoes[4][2],2)))
-            else:
-                axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
-                          str(round(informacoes[4][1],2)))
+                  ', limiar(θ) = '+str(round(informacoes[cont][2],2)))
+            elif simplesOuMultipla == 2:
+                axs1[i,j].set_title('Feedforward - Múltiplas camadas')
+                
             axs1[i, j].plot(vezes[cont][0],vezes[cont][1],vezes[cont][2],label = tipoFuncao)
             axs1[i,j].set_xlabel("x1")
             axs1[i,j].set_ylabel("x2")
@@ -243,6 +251,12 @@ if  __name__ == '__main__':
             axs1[i,j].legend()
             cont+=1
 
+    if simplesOuMultipla == 2:
+        for i in range(len(informacoes)):
+            print()
+            print("Configuração",i+1)
+            print("Pesos Adotados:",informacoes[i][0])
+            print("Limiares Adotados:",informacoes[i][1])
 
     #ax = fig.add_subplot(projection='3d')
     #ax.set_title('Gráfico com w1 = '+str(round(w1,2))+', w2 = '+str(round(w2,2))+', limiar(θ) = '+str(round(limiarDeAtivacao[0],2)))
@@ -254,9 +268,8 @@ if  __name__ == '__main__':
         axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
                   str(round(informacoes[4][1],2))+
                   ', limiar(θ) = '+str(round(informacoes[4][2],2)))
-    else:
-        axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
-                  str(round(informacoes[4][1],2)))
+    elif simplesOuMultipla == 2:
+                axs2.set_title('Feedforward - Múltiplas camadas')
         
     axs2.plot(eixo_x,eixo_y,eixo_z,label = tipoFuncao)
 
