@@ -188,8 +188,6 @@ if  __name__ == '__main__':
         for i in range(numeroCamadas):
                 quantidadePorCamada.append(int(input("Quantidade de neurônios da camada "+str(i+1)+":\n->")))
         for i in range(numeroDeConfiguracoes):
-            w1 = random()#gera o peso w1 randomico para a entrada de cada configuracao
-            w2 = random()#gera o peso w2 randomico para  a entrada cada configuracao
             pesosCamadas = []#vetor que guarda o peso randomico dos neuronios de cada camada
             limiarDeAtivacao = [] #limiar de ativação randomico para cada configuracao
             funcaoDeAtivacao = [] #Funcao de ativação para cada neurônio
@@ -216,21 +214,28 @@ if  __name__ == '__main__':
                         entrada = x2
                     for j in range(quantidadePorCamada[0]):#Quantidade de neurônios da primeira camada
                         aux.append((entrada,pesosCamadas[contadorAux]))
-                    informacoes.append([w1,w2,aux])#informacoes iniciais
+                    
                     contadorAux+=1
                     entrada_e_peso.append(aux)
+            
                         
                 resultado = camadasMultiplas(entrada_e_peso,limiarDeAtivacao,funcaoDeAtivacao,numeroCamadas,quantCamadaAnterior=2,pesosCamadas=pesosCamadas[contadorAux:])[0]#quantCamadaAnterior = 2 pois sempre será duas entradas nos problemas que foram solicitados graficos
                 eixo_x.append(x1)
                 eixo_y.append(x2)
                 eixo_z.append(resultado)
+            informacoes.append([pesosCamadas[contadorAux]])#informacoes do pesos inciais
             vezes.append([eixo_x,eixo_y,eixo_z])#guarda o resultado para cada configuração
 
     cont = 0
     for i in range(2):
         for j in range(2):
-            axs1[i,j].set_title('Gráfico com w1 = '+str(round(informacoes[cont][0],2))+', w2 = '+
-                                str(round(informacoes[cont][1],2)))
+            if simplesOuMultipla == 1:
+                axs1[i,j].set_title('Gráfico com w1 = '+str(round(informacoes[cont][0],2))+', w2 = '+
+                                    str(round(informacoes[cont][1],2))+
+                  ', limiar(θ) = '+str(round(informacoes[4][2],2)))
+            else:
+                axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
+                          str(round(informacoes[4][1],2)))
             axs1[i, j].plot(vezes[cont][0],vezes[cont][1],vezes[cont][2],label = tipoFuncao)
             axs1[i,j].set_xlabel("x1")
             axs1[i,j].set_ylabel("x2")
@@ -245,8 +250,14 @@ if  __name__ == '__main__':
 
     
     fig2, axs2 = plt.subplots(subplot_kw=dict(projection="3d"))
-    axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
-              str(round(informacoes[4][1],2)))
+    if simplesOuMultipla == 1:
+        axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
+                  str(round(informacoes[4][1],2))+
+                  ', limiar(θ) = '+str(round(informacoes[4][2],2)))
+    else:
+        axs2.set_title('Gráfico com w1 = '+str(round(informacoes[4][0],2))+', w2 = '+
+                  str(round(informacoes[4][1],2)))
+        
     axs2.plot(eixo_x,eixo_y,eixo_z,label = tipoFuncao)
 
     axs2.set_xlabel("x1")
