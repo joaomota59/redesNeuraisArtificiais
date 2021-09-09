@@ -215,7 +215,10 @@ if  __name__ == '__main__':
 
             informacoes.append((pesosCamadas,limiarDeAtivacao))
 
-            for x1,x2 in permutations(valoresDeEntrada,2):
+            valoresP = list(permutations(valoresDeEntrada,2)) + [(i,i) for i in valoresDeEntrada]
+
+
+            for x1,x2 in valoresP:
                 contadorAux = 0
                 for i in range(2):#sempre sera duas entradas nas questoes pedidas
                     aux = []
