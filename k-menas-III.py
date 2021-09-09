@@ -4,7 +4,7 @@ import numpy as np
 def somaDasDistanciasQuadraticas(cidades):#retorna a soma de todas distancias euclidianas
     somatorio = 0
     for arr1,arr2 in combinations(cidades,2):
-        somatorio += (arr1[0] - arr2[0])**2 + (arr1[1] - arr2[1])**2
+        somatorio += ((arr1[0] - arr2[0])**2 + (arr1[1] - arr2[1])**2)**0.5
     return somatorio
 
 
