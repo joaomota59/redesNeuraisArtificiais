@@ -168,8 +168,10 @@ if  __name__ == '__main__':
             eixo_x = []#valores do eixo x
             eixo_y = []#valores do eixo y
             eixo_z = []#valores do eixo z
+
+            valoresP = list(permutations(valoresDeEntrada,2)) + [(i,i) for i in valoresDeEntrada]
                     
-            for x1,x2 in permutations(valoresDeEntrada,2):
+            for x1,x2 in valoresP:
                 entrada_e_peso.append([[x1,w1]])
                 entrada_e_peso.append([[x2,w2]])
                 

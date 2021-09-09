@@ -1,11 +1,8 @@
 from itertools import combinations
 import numpy as np
 
-def somaDasDistanciasQuadraticas(cidades):#retorna a soma de todas distancias euclidianas
-    somatorio = 0
-    for arr1,arr2 in combinations(cidades,2):
-        somatorio += ((arr1[0] - arr2[0])**2 + (arr1[1] - arr2[1])**2)**0.5
-    return somatorio
+def somaDasDistanciasQuadraticas(x1,y1,x2,y2):#retorna a soma de todas distancias euclidianas
+    return ((x1 - x2)**2 + (y1 - y2)**2)**0.5
 
 
 if __name__ == "__main__":
