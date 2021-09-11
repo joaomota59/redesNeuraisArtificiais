@@ -1,4 +1,4 @@
-# Redes Neurais Arificiais
+# Redes Neurais Artificiais
 ## Descrição
 * Repositório com programas usados em Redes Neurais Artificiais
 ## Programas
