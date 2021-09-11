@@ -7,7 +7,13 @@ def degrau(u):
         return 1
     else:
         return 0
-
+def degrauBipolar(u):
+    if u>0:
+        return 1
+    elif u==0:
+        return 0
+    else:
+        return -1
 def linear(u):
     return u
 
@@ -53,6 +59,8 @@ def camadaSimples(entrada_e_peso=[],entrada_e_peso_prod=[],limiarDeAtivacao =[],
             k = logistica(potencial,beta)
         elif funcaoDeAtivacao[indicePotencial] == 4:
             k = tangenteHiperbolica(potencial,beta)
+        elif funcaoDeAtivacao[indicePotencial] == 5:
+            k = degrauBipolar(potencial)
         saidas.append(k)
         print("g(u"+str(indicePotencial+1)+") =",k)
     return saidas
@@ -95,7 +103,7 @@ if  __name__ == '__main__':
 
             for i in range(quantidadeDeSaidas):
                 limiarDeAtivacao.append(random())
-                funcaoDeAtivacao.append(4)#função adotada foi a tangente hiperbolica para os testes randomicos
+                funcaoDeAtivacao.append(5)#função adotada foi a degrau bipolar para os testes randomicos
             beta = None
             if ((3 in funcaoDeAtivacao) or (4 in funcaoDeAtivacao)):
                 beta = 1#valor de beta adotado foi sempre de 1
