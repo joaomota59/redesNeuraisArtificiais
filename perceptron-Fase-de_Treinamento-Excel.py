@@ -82,5 +82,3 @@ if  __name__ == '__main__':
         print("\nTreinamento",quantidadeT+1,"finalizado!")
         if quantidadeT != quantidade_de_treinamentos - 1:
             input("Aperte Enter para realizar o próximo treinamento!\n")
-
-
