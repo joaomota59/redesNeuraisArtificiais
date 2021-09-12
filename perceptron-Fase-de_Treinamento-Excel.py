@@ -20,32 +20,34 @@ def perceptron(amostras=[[]],w=[],taxaDeAprendizagem=0.05):
             entradas = [-1] + amostras[indiceAmostra][:-1]#wo = -1 no perceptron ...trocar dps o 0 aqui
             
             u = 0
-            print("\n\nAmostra:",indiceAmostra+1)
-            print("Época:",epoca+1)
-            print("u = ",end="")
+            #print("\n\nAmostra:",indiceAmostra+1)
+            #print("Época:",epoca+1)
+            #print("u = ",end="")
             for i in range(len(entradas)):
                 u+= entradas[i]*w[i]
                 if(i!=len(entradas) - 1):
-                    print(entradas[i],"*",w[i],"+",end="")
+                    #print(entradas[i],"*",w[i],"+",end="")
                     continue
-                print(entradas[i],"*",w[i],"=",u,end="\n")
+                #print(entradas[i],"*",w[i],"=",u,end="\n")
 
             saida = degrauBipolar(u)
 
-            print("g(u) =",saida)#Função degrau Bipolar foi adotada como função de ativação
+            #print("g(u) =",saida)#Função degrau Bipolar foi adotada como função de ativação
 
             if saida != amostras[indiceAmostra][-1]:#se y != d(k)
                 for i in range(len(entradas)):
                     w[i] = w[i] + taxaDeAprendizagem*(amostras[indiceAmostra][-1]-saida)*entradas[i]
                 erro = "existe"
-            print("Erro:",erro)
-            print("W =",w)
+            #print("Erro:",erro)
+            #print("W =",w)
 
             if (erro == "inexiste"):
                 errosInexisteCont+=1
 
         epoca+=1
         if errosInexisteCont == quantAmostras:#se todas amostras possuem o status inexiste
+            print("Valores Finais W =",w)
+            print("Época:",epoca+1)
             return w
 
     
@@ -58,7 +60,9 @@ if  __name__ == '__main__':
     amostras = df.values.tolist()
 
     quantidade_de_treinamentos = int(input("Entre com a quantidade de treinamentos que deseja realizar -> "))
-
+    
+    
+    
     for quantidadeT in range(quantidade_de_treinamentos):
         w = []
         
@@ -73,6 +77,6 @@ if  __name__ == '__main__':
         perceptron(amostras,w,taxaDeAprendizagem = 0.01)#taxa de aprendizagem adotada foi de 0.01
         print("\nTreinamento",quantidadeT+1,"finalizado!")
         if quantidadeT != quantidade_de_treinamentos - 1:
-            input("Aperte Enter para realizar o próximo treinamento!")
+            input("Aperte Enter para realizar o próximo treinamento!\n")
 
 
