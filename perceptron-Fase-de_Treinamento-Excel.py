@@ -1,0 +1,78 @@
+import pandas as pd
+from random import random
+
+def degrauBipolar(u):#Adaptacao para classificao de padroes
+    if u>=0:
+        return 1
+    else:
+        return -1
+
+def perceptron(amostras=[[]],w=[],taxaDeAprendizagem=0.05):
+    quantAmostras = len(amostras)
+
+    epoca = 0
+    
+    while(True):
+        errosInexisteCont = 0
+        for indiceAmostra in range(quantAmostras):
+            erro = "inexiste"
+
+            entradas = [-1] + amostras[indiceAmostra][:-1]#wo = -1 no perceptron ...trocar dps o 0 aqui
+            
+            u = 0
+            print("\n\nAmostra:",indiceAmostra+1)
+            print("Época:",epoca+1)
+            print("u = ",end="")
+            for i in range(len(entradas)):
+                u+= entradas[i]*w[i]
+                if(i!=len(entradas) - 1):
+                    print(entradas[i],"*",w[i],"+",end="")
+                    continue
+                print(entradas[i],"*",w[i],"=",u,end="\n")
+
+            saida = degrauBipolar(u)
+
+            print("g(u) =",saida)#Função degrau Bipolar foi adotada como função de ativação
+
+            if saida != amostras[indiceAmostra][-1]:#se y != d(k)
+                for i in range(len(entradas)):
+                    w[i] = w[i] + taxaDeAprendizagem*(amostras[indiceAmostra][-1]-saida)*entradas[i]
+                erro = "existe"
+            print("Erro:",erro)
+            print("W =",w)
+
+            if (erro == "inexiste"):
+                errosInexisteCont+=1
+
+        epoca+=1
+        if errosInexisteCont == quantAmostras:#se todas amostras possuem o status inexiste
+            return w
+
+    
+
+
+if  __name__ == '__main__':
+
+    df = pd.read_excel('Treinamento_Perceptron.xls')
+
+    amostras = df.values.tolist()
+
+    quantidade_de_treinamentos = int(input("Entre com a quantidade de treinamentos que deseja realizar -> "))
+
+    for quantidadeT in range(quantidade_de_treinamentos):
+        w = []
+        
+        for i in range(len(amostras[0])):#atribui valores randomicos entre 0 e 1 para o vetor w
+            w.append(random())
+
+        _taxaDeAprendizagem = 0.01
+
+        print("Taxa de Aprendizagem adotada:",_taxaDeAprendizagem)
+        print("Valores Iniciais w =",w,end="\n")
+
+        perceptron(amostras,w,taxaDeAprendizagem = 0.01)#taxa de aprendizagem adotada foi de 0.01
+        print("\nTreinamento",quantidadeT+1,"finalizado!")
+        if quantidadeT != quantidade_de_treinamentos - 1:
+            input("Aperte Enter para realizar o próximo treinamento!")
+
+
