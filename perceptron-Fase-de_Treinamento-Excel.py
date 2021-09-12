@@ -57,11 +57,15 @@ if  __name__ == '__main__':
 
     df = pd.read_excel('Treinamento_Perceptron.xls')
 
-    amostras = df.values.tolist()
-
     quantidade_de_treinamentos = int(input("Entre com a quantidade de treinamentos que deseja realizar -> "))
-    
-    
+
+    usarEntradaNormalizada = int(input("Usar Entradas normalizadas [1-Sim] [2-Não] -> "))
+
+    if usarEntradaNormalizada == 1:#Normaliza os valores de entrada dividindo cada valor de entrada pelo maior valor
+        for coluna in list(df.columns)[:-1]:#-1 pq nao faz alterações na coluna de valor desejado (d)
+            df[coluna] = df[coluna]/max(df[coluna])
+
+    amostras = df.values.tolist()
     
     for quantidadeT in range(quantidade_de_treinamentos):
         w = []
