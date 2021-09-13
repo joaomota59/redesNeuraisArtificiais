@@ -55,7 +55,7 @@ def perceptronOperacao(amostrasTP = [[]],w = []):
     quantAmostras = len(amostrasTP)
 
     for indiceAmostra in range(quantAmostras):
-        entradas = amostrasTP[indiceAmostra]
+        entradas = [-1] + amostrasTP[indiceAmostra]
         u = 0
         for j in range(len(entradas)):
             u+= entradas[j]*w[j]
