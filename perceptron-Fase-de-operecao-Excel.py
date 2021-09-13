@@ -46,8 +46,8 @@ def perceptron(amostras=[[]],w=[],taxaDeAprendizagem=0.05):
 
         epoca+=1
         if errosInexisteCont == quantAmostras:#se todas amostras possuem o status inexiste
-            #print("Valores Finais W =",w)
-            #print("Época:",epoca+1)
+            print("Valores Finais W =",w)
+            print("Época:",epoca+1)
             return w
 
 def perceptronOperacao(amostrasTP = [[]],w = []):
