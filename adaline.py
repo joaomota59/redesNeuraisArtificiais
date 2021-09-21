@@ -98,8 +98,5 @@ if  __name__ == '__main__':
 
         if diferencaAtualeAnterior <= precisaoRequerida or numMaxEpocas == epoca:
             break
-    
-    
-
 
         
