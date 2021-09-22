@@ -28,25 +28,27 @@ if  __name__ == '__main__':
     taxaDeAprendizagem = float(input("Taxa de aprendizagem(η) -> "))
 
     epoca = 0
-
+    vetPotAtv = []#lista que guarda os valores do potencial de ativacao
+    
     while True:
-        vetPotAtv = []
         print("\nÉpoca:",epoca+1)
-        for indiceAmostra in range(quantAmostras):
-            entradas = [-1] + amostras[indiceAmostra][:-1]#wo = -1 no perceptron ...trocar dps o 0 aqui
+        if epoca == 0:
+            for indiceAmostra in range(quantAmostras):
+                entradas = [-1] + amostras[indiceAmostra][:-1]#wo = -1 no perceptron ...trocar dps o 0 aqui
 
-            u = 0
-            print("u = ",end="")
-            for i in range(len(entradas)):
-                u+= entradas[i]*w[i]
-                if(i!=len(entradas) - 1):
-                    print(entradas[i],"*",w[i],"+",end="")
-                    continue
-                print(entradas[i],"*",w[i],"=",u,end="\n")
+                u = 0
+                print("u = ",end="")
+                for i in range(len(entradas)):
+                    u+= entradas[i]*w[i]
+                    if(i!=len(entradas) - 1):
+                        print(entradas[i],"*",w[i],"+",end="")
+                        continue
+                    print(entradas[i],"*",w[i],"=",u,end="\n")
 
-            #epoca += 1
-            
-            vetPotAtv.append(u)
+                #epoca += 1
+                
+                vetPotAtv.append(u)
+
         print("W =",w)
         print("Eqm_Anterior(w) = ",end="")
 
@@ -62,6 +64,7 @@ if  __name__ == '__main__':
         vetPotAtv = []
 
         for indiceAmostra in range(quantAmostras):
+            entradas = [-1] + amostras[indiceAmostra][:-1]#wo = -1 no perceptron ...trocar dps o 0 aqui
             u = 0
 
             #print("Época:",epoca+1)
