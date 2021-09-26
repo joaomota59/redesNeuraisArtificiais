@@ -1,5 +1,8 @@
 from random import random
 import pandas as pd
+import matplotlib.pyplot as plt
+
+
 
 def degrau(u):
     if u>=0:
@@ -15,15 +18,21 @@ if  __name__ == '__main__':
     amostras = df.values.tolist()
     quantAmostras = len(amostras)
     precisaoRequerida = 0.000001 #10^-6
-    w = [random(),random(),random(),random(),random()]
-
+    print('''\nDigite os valores do vetor contendo limiar e os pesos,
+          separados por vírgula!
+          exemplo: θ,w1,w2,w3
+          exemplo: 0.5,0.4,0.3,0.1
+          ''')
+    w = [float(i) for i in input("-> ").split(",")]
+    print("Pesos iniciais -> W =",w,end="\n\n")
     taxaDeAprendizagem = 0.0025
+    errosQuadraticosM = []
 
     epoca = 0
     vetPotAtv = []#lista que guarda os valores do potencial de ativacao
     
     while True:
-        print("\nÉpoca:",epoca+1)
+        #print("\nÉpoca:",epoca+1)
         if epoca == 0:
             for indiceAmostra in range(quantAmostras):
                 entradas = [-1] + amostras[indiceAmostra][:-1]#wo = -1 no perceptron ...trocar dps o 0 aqui
@@ -52,7 +61,9 @@ if  __name__ == '__main__':
                 continue
             equacao += "("+str(amostras[index][-1])+"-"+str(potencial)+")**2 )"
         #print(equacao,"=",eval(equacao))
-
+            
+        errosQuadraticosM.append(eval(equacao))
+        
         vetPotAtv = []
 
         for indiceAmostra in range(quantAmostras):
@@ -83,13 +94,23 @@ if  __name__ == '__main__':
                 continue
             equacao2 += "("+str(amostras[index][-1])+"-"+str(potencial)+")**2 )"
         #print(equacao2,"=",eval(equacao2))
-        print("W =",w)
-
-        epoca+=1
+        #print("W =",w)
 
         diferencaAtualeAnterior = abs(eval(equacao) - eval(equacao2))
 
         #print("|Eqm_Atual(w) - Eqm_Anterior(w)| =",diferencaAtualeAnterior)
 
         if diferencaAtualeAnterior <= precisaoRequerida:
+            print("\nÉpoca:",epoca+1)
+            print("Pesos Finais -> W =",w)
             break
+        
+        epoca+=1
+
+    ###Grafico
+    fig, ax = plt.subplots()
+    ax.plot([i+1 for i in range(epoca+1)],errosQuadraticosM)
+    ax.set_xlabel('Época')
+    ax.set_ylabel('Erro Quadrático médio')
+    plt.show()
+    
