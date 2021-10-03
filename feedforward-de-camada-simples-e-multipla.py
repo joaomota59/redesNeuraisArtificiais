@@ -154,7 +154,7 @@ if  __name__ == '__main__':
             aux = []
             entrada = float(input("Digite a entrada x"+str(i+1)+":"))
             for j in range(quantidadeDeSaidas):
-                aux.append((entrada,float(input("Digite o peso (w"+str(i+1)+","+str(j+1)+"):"))))
+                aux.append((entrada,float(input("Digite o peso (w"+str(j+1)+","+str(i+1)+"):"))))
             entrada_e_peso.append(aux)
 
         for linha in entrada_e_peso: #Faz o produto da entrada com o peso para cada neuronio
